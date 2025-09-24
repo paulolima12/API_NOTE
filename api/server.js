@@ -1,13 +1,11 @@
 import express from 'express'
-
-// import pkg from '@prisma/client'
-// const {PrismaClient} = pkg
+import cors from 'cors'
 import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient()
+
 const app = express()
+const prisma = new PrismaClient()
 app.use(express.json())
-
-
+app.use(cors())
 app.get('/cadastro', async (req,res)=>{
     const usuarios = await prisma.usuario.findMany()
     res.status(200) .json(usuarios)
